@@ -1,0 +1,8 @@
+overwrite: true
+documents: null
+generates:
+  src/service/types.ts:
+    schema: "./src/service/schema.ts"
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
