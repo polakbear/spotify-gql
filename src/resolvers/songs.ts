@@ -1,5 +1,5 @@
 import { QueryArtistsArgs, Resolvers, SongsResult, Track } from '../types';
-import { authenticate } from '../../helpers/auth';
+import { authenticate } from '../helpers/auth';
 
 export const songs: Resolvers['Query']['songs'] = (
   parent: any,

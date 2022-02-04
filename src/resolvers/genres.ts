@@ -1,5 +1,5 @@
 import { Genre, GenresResult, Resolvers } from '../types';
-import { authenticate } from '../../helpers/auth';
+import { authenticate } from '../helpers/auth';
 
 export const genres: Resolvers['Query']['genres'] = () => {
   const spot = authenticate();

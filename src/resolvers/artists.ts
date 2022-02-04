@@ -5,7 +5,7 @@ import {
   QueryArtistsArgs,
   Resolvers,
 } from '../types';
-import { authenticate } from '../../helpers/auth';
+import { authenticate } from '../helpers/auth';
 
 export const artists: Resolvers['Query']['artists'] = (
   parent: any,

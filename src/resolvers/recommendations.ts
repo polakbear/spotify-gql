@@ -3,9 +3,9 @@ import {
   RecommendationsResult,
   Resolvers,
 } from '../types';
-import { authenticate } from '../../helpers/auth';
-import { seeds } from '../../config/config';
-import { toMinutes } from '../../helpers/time';
+import { authenticate } from '../helpers/auth';
+import { seeds } from '../config/config';
+import { toMinutes } from '../helpers/time';
 
 export const recommendations: Resolvers['Query']['recommendations'] = (
   parent: any,

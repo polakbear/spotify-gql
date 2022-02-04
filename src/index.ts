@@ -2,7 +2,13 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildFederatedSchema } from '@apollo/federation';
 import { initApp } from './app';
 import { config } from './config/config';
-import { spotify } from './service';
+import {typeDefs} from "./schema";
+import {resolvers} from "./resolvers";
+
+export const spotify = {
+  typeDefs,
+  resolvers,
+};
 
 new ApolloServer({
   playground: true,
@@ -11,3 +17,4 @@ new ApolloServer({
     accessToken: expressContext.req.header('accessToken'),
   }),
 }).applyMiddleware({ app: initApp(config.port), cors: false });
+

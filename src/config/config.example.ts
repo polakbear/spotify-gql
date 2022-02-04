@@ -7,5 +7,11 @@ export const config = {
   clientSecret: '',
   port: 4000,
   baseUrl: 'http://localhost',
-  callbackUrl: `/auth/spotify/callback`,
+  callbackUrl: `/auth/spotify/callback`
 };
+
+export const seeds = {
+  artists: [''],
+  genres: [''],
+  tracks: [''],
+}
