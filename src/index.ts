@@ -5,14 +5,12 @@ import { config } from './config/config';
 import {typeDefs} from "./schema";
 import {resolvers} from "./resolvers";
 
-export const spotify = {
-  typeDefs,
-  resolvers,
-};
-
 new ApolloServer({
   playground: true,
-  schema: buildFederatedSchema([spotify as any]),
+  schema: buildFederatedSchema([ {
+    typeDefs,
+    resolvers,
+  }]),
   context: (expressContext) => ({
     accessToken: expressContext.req.header('accessToken'),
   }),
