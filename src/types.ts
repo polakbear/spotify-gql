@@ -36,7 +36,7 @@ export type Artist = {
 
 export type ArtistsResult = {
   __typename?: 'ArtistsResult';
-  artists?: Maybe<Array<Maybe<Artist>>>;
+  result?: Maybe<Array<Maybe<Artist>>>;
 };
 
 export type AudioFeatures = {
@@ -73,7 +73,7 @@ export type Genre = {
 
 export type GenresResult = {
   __typename?: 'GenresResult';
-  genres?: Maybe<Array<Maybe<Genre>>>;
+  result?: Maybe<Array<Maybe<Genre>>>;
 };
 
 export type Image = {
@@ -271,7 +271,7 @@ export type ArtistResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type ArtistsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArtistsResult'] = ResolversParentTypes['ArtistsResult']> = {
-  artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
+  result?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -281,7 +281,7 @@ export type GenreResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type GenresResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['GenresResult'] = ResolversParentTypes['GenresResult']> = {
-  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
+  result?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

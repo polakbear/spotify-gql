@@ -3,7 +3,7 @@ import {
   RecommendationsResult,
   Resolvers,
 } from '../types';
-import { authenticate } from '../helpers/auth';
+import { spotifyAPI, authenticate } from '../helpers/auth';
 import { seeds } from '../config/config';
 import { toMinutes } from '../helpers/time';
 
@@ -11,7 +11,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
   parent: any,
   args: QueryRecommendationsArgs,
 ) => {
-  const spot = authenticate();
+  authenticate();
 
   const audioOptions = {
     seed_artists: seeds.artists,
@@ -25,7 +25,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
     // seed_tracks: args.seedTracks,
   };
 
-  return spot.getRecommendations(audioOptions).then((resp) => {
+  return spotifyAPI.getRecommendations(audioOptions).then((resp) => {
     const res: RecommendationsResult = {
       tracks: resp.body.tracks.map((track) => {
         return {

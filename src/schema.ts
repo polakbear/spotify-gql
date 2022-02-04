@@ -53,7 +53,7 @@ export const typeDefs = gql`
   }
 
   type ArtistsResult {
-    artists: [Artist]
+    result: [Artist]
   }
 
   type Genre {
@@ -61,7 +61,7 @@ export const typeDefs = gql`
   }
 
   type GenresResult {
-    genres: [Genre]
+     result: [Genre]
   }
   input AudioFeatures {
     id: String
