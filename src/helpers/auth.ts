@@ -14,18 +14,9 @@ const headers = {
     ).toString('base64')}`,
 }
 
-interface Token {
-    token: string,
-    expires: number
-}
+let token = ''
 
-let token: Token = {
-    token: '',
-    expires: Date.now()
-}
-
-
-const fetchToken = (): Token => {
+const fetchToken = (): string => {
     fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers,
@@ -37,8 +28,8 @@ const fetchToken = (): Token => {
             const expires = new Date();
             expires.setHours(expires.getHours() + 1);
             db.push('token', response.access_token);
-            token.token =  response.access_token;
-            token.expires = expires.getTime()
+            token =  response.access_token;
+            // db.push('expires', expires);
         });
 
     return token;
@@ -46,5 +37,5 @@ const fetchToken = (): Token => {
 
 export const authenticate = () => {
     const token = fetchToken();
-    spotifyAPI.setAccessToken(token.token);
+    spotifyAPI.setAccessToken(token);
 }
