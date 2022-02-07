@@ -7,6 +7,7 @@ import {resolvers} from "./resolvers";
 
 new ApolloServer({
   playground: true,
+  introspection: true,
   schema: buildFederatedSchema([ {
     typeDefs,
     resolvers,
