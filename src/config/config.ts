@@ -9,7 +9,7 @@ export const config = {
 };
 
 export const seeds = {
-  artists: [''],
+  artists: ['4NHQUGzhtTLFvgF5SZesLK'],
   genres: [''],
-  tracks: [''],
+  tracks: ['0c6xIDDpzE81m2q797ordA'],
 }
