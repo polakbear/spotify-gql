@@ -19,6 +19,7 @@ app.listen({ port: port }, () => {
 });
 
 new ApolloServer({
+  playground: true,
   typeDefs,
   resolvers,
 }).applyMiddleware({ app, cors: false });
