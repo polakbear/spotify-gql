@@ -1,13 +1,14 @@
 import fetch from 'node-fetch';
-import {config} from '../config/config';
+import {getConfig} from '../config/config';
 import SpotifyWebApi from "spotify-web-api-node";
 
 export const spotifyAPI = new SpotifyWebApi();
+const { clientId, clientSecret } = getConfig();
 
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
     Authorization: `Basic ${Buffer.from(
-        `${config.clientId}:${config.clientSecret}`,
+        `${clientId}:${clientSecret}`,
     ).toString('base64')}`,
 }
 

@@ -93,7 +93,7 @@ export const typeDefs = gql`
     tempo: Int
   }
 
-  extend type Query {
+type Query {
     recommendations(audioFeatures: AudioFeatures): RecommendationsResult
     songs(searchString: String!): SongsResult
     artists(searchString: String!): ArtistsResult
