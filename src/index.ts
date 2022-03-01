@@ -5,21 +5,23 @@ import {resolvers} from "./resolvers";
 import express from 'express';
 import cors from 'cors'
 
-const app = express();
 
-// app.use(
-//   session({ secret: 'kittycat', saveUninitialized: true, resave: true }),
-// );
 
-const { port } = getConfig();
+async function startApollo() {
+  const app = express();
+  const { port } = getConfig();  
+  const server = new ApolloServer({
+    playground: true,
+    typeDefs,
+    resolvers,
+  });
+  
+  await server.start();
+  server.applyMiddleware({ app });
+  
+  app.listen({ port: port }, () => {
+    console.log(`server is sniffing on port ${port}`);
+  });
+}
 
-app.use(cors());
-app.listen({ port: port }, () => {
-  console.log(`server is sniffing on port ${port}`);
-});
-
-new ApolloServer({
-  playground: true,
-  typeDefs,
-  resolvers,
-}).applyMiddleware({ app, cors: false });
+startApollo();
