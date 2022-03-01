@@ -1,7 +1,7 @@
-import {ApolloServer} from 'apollo-server-express';
-import {typeDefs} from './schema';
-import {resolvers} from './resolvers';
-import {createServer} from 'http';
+import { ApolloServer } from 'apollo-server-express';
+import { typeDefs } from './schema';
+import { resolvers } from './resolvers';
+import { createServer } from 'http';
 import express from 'express';
 // import { prisma } from "./prisma/client";
 
@@ -24,4 +24,4 @@ const startServer = async () => {
   );
 };
 
-startServer()
+void startServer();
