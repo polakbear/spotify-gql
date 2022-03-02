@@ -1,5 +1,5 @@
 import { QueryArtistsArgs, Resolvers, SongsResult, Track } from '../types';
-import { spotifyAPI, authenticate } from '../helpers/auth';
+import { authenticate, spotifyAPI } from '../helpers/auth';
 
 export const songs: Resolvers['Query']['songs'] = (
   parent: any,
@@ -9,10 +9,14 @@ export const songs: Resolvers['Query']['songs'] = (
   return spotifyAPI.searchTracks(args.searchString).then((resp) => {
     const res: SongsResult = {
       tracks: resp.body.tracks.items.map((track) => {
+        const artists = track.artists.map((art) => {
+          return art.name;
+        });
+
         return {
           id: track.id,
           name: track.name,
-          artists: track.artists,
+          artists,
           album: track.album,
         } as Track;
       }),
