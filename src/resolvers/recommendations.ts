@@ -2,10 +2,12 @@ import {
   QueryRecommendationsArgs,
   RecommendationsResult,
   Resolvers,
+  Track,
 } from '../types';
-import { spotifyAPI, authenticate } from '../helpers/auth';
+import { authenticate, spotifyAPI } from '../helpers/auth';
 import { seeds } from '../config/config';
 import { toMinutes } from '../helpers/time';
+import TrackObjectFull = SpotifyApi.TrackObjectFull;
 
 export const recommendations: Resolvers['Query']['recommendations'] = (
   parent: any,
@@ -19,23 +21,30 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
     seed_tracks: seeds.tracks,
     ...args.audioFeatures,
 
-    // TODO: MVP has pre-defined seeds, implement custom later
+    // TODO: pre-defined seeds, implement custom later
     // seed_artists: args.seedArtists,
     // seed_genres: args.seedGenres,
     // seed_tracks: args.seedTracks,
   };
 
-  return spotifyAPI.getRecommendations(audioOptions).then((resp) => {
-    const res: RecommendationsResult = {
-      tracks: resp.body.tracks.map((track) => {
-        return {
-          id: track.id,
-          name: track.name,
-          artists: track.artists,
-          duration_human: toMinutes(track.duration_ms),
-        };
-      }),
-    };
-    return res;
-  });
+  return spotifyAPI
+    .getRecommendations(audioOptions)
+    .then((resp): RecommendationsResult => {
+      return {
+        tracks: resp.body.tracks.map((track: TrackObjectFull): Track => {
+          return {
+            id: track.id,
+            album: track.album,
+            uri: track.uri,
+            name: track.name,
+            artists: track.artists,
+            duration_human: toMinutes(track.duration_ms),
+            duration_ms: track.duration_ms,
+            popularity: track.popularity,
+            preview_url: track.preview_url,
+            href: track.href,
+          };
+        }),
+      };
+    });
 };

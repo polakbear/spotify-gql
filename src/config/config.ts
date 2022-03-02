@@ -10,6 +10,6 @@ export const config = {
 
 export const seeds = {
   artists: ['4NHQUGzhtTLFvgF5SZesLK'],
-  genres: [''],
+  genres: ['country'],
   tracks: ['0c6xIDDpzE81m2q797ordA'],
-}
+};
