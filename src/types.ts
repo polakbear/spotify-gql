@@ -15,23 +15,23 @@ export type Scalars = {
 
 export type Album = {
   __typename?: 'Album';
-  id?: Maybe<Scalars['String']>;
   artists?: Maybe<Array<Maybe<Artist>>>;
   available_markets?: Maybe<Array<Maybe<Scalars['String']>>>;
   href?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type Artist = {
   __typename?: 'Artist';
-  id?: Maybe<Scalars['String']>;
+  genres?: Maybe<Array<Maybe<Genre>>>;
   href?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  images?: Maybe<Array<Maybe<Image>>>;
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
-  images?: Maybe<Array<Maybe<Image>>>;
-  genres?: Maybe<Array<Maybe<Genre>>>;
 };
 
 export type ArtistsResult = {
@@ -40,28 +40,28 @@ export type ArtistsResult = {
 };
 
 export type AudioFeatures = {
-  id?: Maybe<Scalars['String']>;
-  min_acousticness?: Maybe<Scalars['Float']>;
-  max_acousticness?: Maybe<Scalars['Float']>;
-  min_danceability?: Maybe<Scalars['Float']>;
-  max_danceability?: Maybe<Scalars['Float']>;
-  min_energy?: Maybe<Scalars['Float']>;
-  max_energy?: Maybe<Scalars['Float']>;
-  min_instrumentalness?: Maybe<Scalars['Float']>;
-  max_instrumentalness?: Maybe<Scalars['Float']>;
-  min_popularity?: Maybe<Scalars['Int']>;
-  max_popularity?: Maybe<Scalars['Int']>;
-  min_liveness?: Maybe<Scalars['Float']>;
-  max_liveness?: Maybe<Scalars['Float']>;
-  min_loudness?: Maybe<Scalars['Float']>;
-  max_loudness?: Maybe<Scalars['Float']>;
-  min_speechiness?: Maybe<Scalars['Float']>;
-  max__speechiness?: Maybe<Scalars['Float']>;
-  min_valence?: Maybe<Scalars['Float']>;
-  max_valence?: Maybe<Scalars['Float']>;
   analysis_url?: Maybe<Scalars['String']>;
   duration_ms?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['Int']>;
+  max__speechiness?: Maybe<Scalars['Float']>;
+  max_acousticness?: Maybe<Scalars['Float']>;
+  max_danceability?: Maybe<Scalars['Float']>;
+  max_energy?: Maybe<Scalars['Float']>;
+  max_instrumentalness?: Maybe<Scalars['Float']>;
+  max_liveness?: Maybe<Scalars['Float']>;
+  max_loudness?: Maybe<Scalars['Float']>;
+  max_popularity?: Maybe<Scalars['Int']>;
+  max_valence?: Maybe<Scalars['Float']>;
+  min_acousticness?: Maybe<Scalars['Float']>;
+  min_danceability?: Maybe<Scalars['Float']>;
+  min_energy?: Maybe<Scalars['Float']>;
+  min_instrumentalness?: Maybe<Scalars['Float']>;
+  min_liveness?: Maybe<Scalars['Float']>;
+  min_loudness?: Maybe<Scalars['Float']>;
+  min_popularity?: Maybe<Scalars['Int']>;
+  min_speechiness?: Maybe<Scalars['Float']>;
+  min_valence?: Maybe<Scalars['Float']>;
   mode?: Maybe<Scalars['Int']>;
   tempo?: Maybe<Scalars['Int']>;
 };
@@ -85,10 +85,15 @@ export type Image = {
 
 export type Query = {
   __typename?: 'Query';
-  recommendations?: Maybe<RecommendationsResult>;
-  songs?: Maybe<SongsResult>;
   artists?: Maybe<ArtistsResult>;
   genres?: Maybe<GenresResult>;
+  recommendations?: Maybe<RecommendationsResult>;
+  songs?: Maybe<SongsResult>;
+};
+
+
+export type QueryArtistsArgs = {
+  searchString: Scalars['String'];
 };
 
 
@@ -98,11 +103,6 @@ export type QueryRecommendationsArgs = {
 
 
 export type QuerySongsArgs = {
-  searchString: Scalars['String'];
-};
-
-
-export type QueryArtistsArgs = {
   searchString: Scalars['String'];
 };
 
@@ -118,15 +118,15 @@ export type SongsResult = {
 
 export type Track = {
   __typename?: 'Track';
-  id?: Maybe<Scalars['String']>;
   album?: Maybe<Album>;
-  artists?: Maybe<Array<Maybe<Artist>>>;
+  artists?: Maybe<Array<Maybe<Scalars['String']>>>;
   available_markets?: Maybe<Array<Maybe<Scalars['String']>>>;
   disc_number?: Maybe<Scalars['Int']>;
-  duration_ms?: Maybe<Scalars['Float']>;
   duration_human?: Maybe<Scalars['String']>;
+  duration_ms?: Maybe<Scalars['Float']>;
   explicit?: Maybe<Scalars['Boolean']>;
   href?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   popularity?: Maybe<Scalars['Int']>;
   preview_url?: Maybe<Scalars['String']>;
@@ -214,59 +214,59 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Album: ResolverTypeWrapper<Album>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Artist: ResolverTypeWrapper<Artist>;
   ArtistsResult: ResolverTypeWrapper<ArtistsResult>;
   AudioFeatures: AudioFeatures;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Genre: ResolverTypeWrapper<Genre>;
   GenresResult: ResolverTypeWrapper<GenresResult>;
   Image: ResolverTypeWrapper<Image>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Query: ResolverTypeWrapper<{}>;
   RecommendationsResult: ResolverTypeWrapper<RecommendationsResult>;
   SongsResult: ResolverTypeWrapper<SongsResult>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Track: ResolverTypeWrapper<Track>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Album: Album;
-  String: Scalars['String'];
   Artist: Artist;
   ArtistsResult: ArtistsResult;
   AudioFeatures: AudioFeatures;
+  Boolean: Scalars['Boolean'];
   Float: Scalars['Float'];
-  Int: Scalars['Int'];
   Genre: Genre;
   GenresResult: GenresResult;
   Image: Image;
+  Int: Scalars['Int'];
   Query: {};
   RecommendationsResult: RecommendationsResult;
   SongsResult: SongsResult;
+  String: Scalars['String'];
   Track: Track;
-  Boolean: Scalars['Boolean'];
 };
 
 export type AlbumResolvers<ContextType = any, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
   available_markets?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArtistResolvers<ContextType = any, ParentType extends ResolversParentTypes['Artist'] = ResolversParentTypes['Artist']> = {
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
-  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -293,10 +293,10 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  recommendations?: Resolver<Maybe<ResolversTypes['RecommendationsResult']>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
-  songs?: Resolver<Maybe<ResolversTypes['SongsResult']>, ParentType, ContextType, RequireFields<QuerySongsArgs, 'searchString'>>;
   artists?: Resolver<Maybe<ResolversTypes['ArtistsResult']>, ParentType, ContextType, RequireFields<QueryArtistsArgs, 'searchString'>>;
   genres?: Resolver<Maybe<ResolversTypes['GenresResult']>, ParentType, ContextType>;
+  recommendations?: Resolver<Maybe<ResolversTypes['RecommendationsResult']>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
+  songs?: Resolver<Maybe<ResolversTypes['SongsResult']>, ParentType, ContextType, RequireFields<QuerySongsArgs, 'searchString'>>;
 };
 
 export type RecommendationsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RecommendationsResult'] = ResolversParentTypes['RecommendationsResult']> = {
@@ -310,15 +310,15 @@ export type SongsResultResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   album?: Resolver<Maybe<ResolversTypes['Album']>, ParentType, ContextType>;
-  artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
+  artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   available_markets?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   disc_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  duration_ms?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   duration_human?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  duration_ms?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   explicit?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   popularity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   preview_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

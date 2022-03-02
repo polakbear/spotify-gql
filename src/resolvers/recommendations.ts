@@ -40,7 +40,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
             album: track.album,
             uri: track.uri,
             name: track.name,
-            artists: track.artists,
+            artists,
             duration_human: toMinutes(track.duration_ms),
             duration_ms: track.duration_ms,
             popularity: track.popularity,

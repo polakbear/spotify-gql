@@ -10,7 +10,7 @@ export const typeDefs = gql`
   type Track {
     id: String
     album: Album
-    artists: [Artist]
+    artists: [String]
     available_markets: [String]
     disc_number: Int
     duration_ms: Float
@@ -61,7 +61,7 @@ export const typeDefs = gql`
   }
 
   type GenresResult {
-     result: [Genre]
+    result: [Genre]
   }
   input AudioFeatures {
     id: String
@@ -92,8 +92,8 @@ export const typeDefs = gql`
     mode: Int
     tempo: Int
   }
-  
-type Query {
+
+  type Query {
     recommendations(audioFeatures: AudioFeatures): RecommendationsResult
     songs(searchString: String!): SongsResult
     artists(searchString: String!): ArtistsResult
