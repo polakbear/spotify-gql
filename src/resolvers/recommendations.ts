@@ -32,6 +32,9 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
     .then((resp): RecommendationsResult => {
       return {
         tracks: resp.body.tracks.map((track: TrackObjectFull): Track => {
+          const artists = track.artists.map((art) => {
+            return art.name;
+          });
           return {
             id: track.id,
             album: track.album,
