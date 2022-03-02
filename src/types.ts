@@ -99,6 +99,7 @@ export type QueryArtistsArgs = {
 
 export type QueryRecommendationsArgs = {
   audioFeatures?: Maybe<AudioFeatures>;
+  seedGenres?: Maybe<Scalars['String']>;
 };
 
 

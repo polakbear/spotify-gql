@@ -94,7 +94,10 @@ export const typeDefs = gql`
   }
 
   type Query {
-    recommendations(audioFeatures: AudioFeatures): RecommendationsResult
+    recommendations(
+      audioFeatures: AudioFeatures
+      seedGenres: String
+    ): RecommendationsResult
     songs(searchString: String!): SongsResult
     artists(searchString: String!): ArtistsResult
     genres: GenresResult

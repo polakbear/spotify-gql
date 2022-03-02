@@ -17,7 +17,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
 
   const audioOptions = {
     seed_artists: seeds.artists,
-    seed_genres: seeds.genres,
+    seed_genres: args.seedGenres ?? seeds.genres,
     seed_tracks: seeds.tracks,
     ...args.audioFeatures,
 
