@@ -60,9 +60,6 @@ export const typeDefs = gql`
     name: String
   }
 
-  type GenresResult {
-    result: [Genre]
-  }
   input AudioFeatures {
     id: String
 
@@ -100,6 +97,6 @@ export const typeDefs = gql`
     ): RecommendationsResult
     songs(searchString: String!): SongsResult
     artists(searchString: String!): ArtistsResult
-    genres: GenresResult
+    genres: [Genre!]!
   }
 `;

@@ -71,11 +71,6 @@ export type Genre = {
   name?: Maybe<Scalars['String']>;
 };
 
-export type GenresResult = {
-  __typename?: 'GenresResult';
-  result?: Maybe<Array<Maybe<Genre>>>;
-};
-
 export type Image = {
   __typename?: 'Image';
   height?: Maybe<Scalars['Int']>;
@@ -86,7 +81,7 @@ export type Image = {
 export type Query = {
   __typename?: 'Query';
   artists?: Maybe<ArtistsResult>;
-  genres?: Maybe<GenresResult>;
+  genres: Array<Genre>;
   recommendations?: Maybe<RecommendationsResult>;
   songs?: Maybe<SongsResult>;
 };
@@ -221,7 +216,6 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Genre: ResolverTypeWrapper<Genre>;
-  GenresResult: ResolverTypeWrapper<GenresResult>;
   Image: ResolverTypeWrapper<Image>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Query: ResolverTypeWrapper<{}>;
@@ -240,7 +234,6 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Float: Scalars['Float'];
   Genre: Genre;
-  GenresResult: GenresResult;
   Image: Image;
   Int: Scalars['Int'];
   Query: {};
@@ -281,11 +274,6 @@ export type GenreResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type GenresResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['GenresResult'] = ResolversParentTypes['GenresResult']> = {
-  result?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
   height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -295,7 +283,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   artists?: Resolver<Maybe<ResolversTypes['ArtistsResult']>, ParentType, ContextType, RequireFields<QueryArtistsArgs, 'searchString'>>;
-  genres?: Resolver<Maybe<ResolversTypes['GenresResult']>, ParentType, ContextType>;
+  genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
   recommendations?: Resolver<Maybe<ResolversTypes['RecommendationsResult']>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
   songs?: Resolver<Maybe<ResolversTypes['SongsResult']>, ParentType, ContextType, RequireFields<QuerySongsArgs, 'searchString'>>;
 };
@@ -334,7 +322,6 @@ export type Resolvers<ContextType = any> = {
   Artist?: ArtistResolvers<ContextType>;
   ArtistsResult?: ArtistsResultResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
-  GenresResult?: GenresResultResolvers<ContextType>;
   Image?: ImageResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   RecommendationsResult?: RecommendationsResultResolvers<ContextType>;
