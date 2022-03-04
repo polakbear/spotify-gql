@@ -9,39 +9,38 @@ export const typeDefs = gql`
 
   type Track {
     id: String
-    album: Album
-    artists: [String]
+    album: Album!
+    artists: [Artist!]!
     available_markets: [String]
     disc_number: Int
     duration_ms: Float
     duration_human: String
     explicit: Boolean
     href: String
-    name: String
+    name: String!
     popularity: Int
-    preview_url: String
-    track_number: Int
-    type: String
-    uri: String
+    uri: String!
   }
 
   type Artist {
     id: String
     href: String
-    name: String
+    name: String!
     type: String
     uri: String
-    images: [Image]
-    genres: [Genre]
+    image: String
+    genres: [String]
   }
 
   type Album {
-    id: String
+    id: String!
     artists: [Artist]
     available_markets: [String]
     href: String
     label: String
-    name: String
+    name: String!
+    images: [Image!]!
+    release_date: String!
   }
 
   type RecommendationsResult {
@@ -54,10 +53,6 @@ export const typeDefs = gql`
 
   type ArtistsResult {
     result: [Artist]
-  }
-
-  type Genre {
-    name: String
   }
 
   input AudioFeatures {
@@ -90,13 +85,14 @@ export const typeDefs = gql`
     tempo: Int
   }
 
+  type ArtistImageMap {
+    id: String!
+    img: String!
+  }
+
   type Query {
-    recommendations(
-      audioFeatures: AudioFeatures
-      seedGenres: String
-    ): RecommendationsResult
-    songs(searchString: String!): SongsResult
-    artists(searchString: String!): ArtistsResult
-    genres: [Genre!]!
+    recommendations(audioFeatures: AudioFeatures, seedGenres: String): [Track]!
+    artist(artistId: String!): Artist!
+    genres: [String!]!
   }
 `;

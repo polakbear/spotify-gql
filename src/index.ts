@@ -3,7 +3,6 @@ import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { createServer } from 'http';
 import express from 'express';
-// import { prisma } from "./prisma/client";
 
 const startServer = async () => {
   const app = express();

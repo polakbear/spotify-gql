@@ -1,29 +1,18 @@
-import {
-  Artist,
-  ArtistsResult,
-  Genre,
-  QueryArtistsArgs,
-  Resolvers,
-} from '../types';
-import { spotifyAPI, authenticate } from '../helpers/auth';
+import { QueryArtistArgs, Resolvers } from '../types';
+import { authenticate, spotify } from '../helpers/auth';
 
-export const artists: Resolvers['Query']['artists'] = (
+export const artist: Resolvers['Query']['artist'] = async (
   parent: any,
-  args: QueryArtistsArgs,
+  args: QueryArtistArgs,
 ) => {
-  authenticate();
+  await authenticate();
 
-  return spotifyAPI.searchArtists(args.searchString).then((resp) => {
-    const res: ArtistsResult = {
-      result: resp.body.artists.items.map((artist) => {
-        return {
-          id: artist.id,
-          name: artist.name,
-          images: artist.images,
-          genres: artist.genres.map((genre) => ({ name: genre })),
-        };
-      }),
-    };
-    return res;
-  });
+  try {
+    const response = await spotify.getArtist(args.artistId);
+    if (response) {
+      return response;
+    }
+  } catch (e) {
+    console.error(e);
+  }
 };
