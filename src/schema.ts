@@ -8,7 +8,7 @@ export const typeDefs = gql`
   }
 
   type Track {
-    id: String
+    id: String!
     album: SimplifiedAlbum!
     artists: [SimplifiedArtist!]!
     available_markets: [String]

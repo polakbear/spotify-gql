@@ -176,7 +176,7 @@ export type Track = {
   duration_ms?: Maybe<Scalars['Float']>;
   explicit?: Maybe<Scalars['Boolean']>;
   href?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   name: Scalars['String'];
   popularity?: Maybe<Scalars['Int']>;
   uri: Scalars['String'];
@@ -415,7 +415,7 @@ export type TrackResolvers<ContextType = any, ParentType extends ResolversParent
   duration_ms?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   explicit?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   popularity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
