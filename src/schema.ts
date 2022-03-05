@@ -78,7 +78,7 @@ export const typeDefs = gql`
     result: [Artist]
   }
 
-  input AudioFeatures {
+  input AudioOptions {
     id: String
 
     min_acousticness: Float
@@ -113,10 +113,29 @@ export const typeDefs = gql`
     img: String!
   }
 
+  type AudioFeatures {
+    danceability: Float!
+    energy: Float!
+    key: Int!
+    loudness: Float!
+    mode: Int!
+    speechiness: Float!
+    acousticness: Float!
+    instrumentalness: Float!
+    liveness: Float!
+    valence: Float!
+    tempo: Float!
+    id: String!
+    uri: String!
+    track_href: String!
+    duration_ms: Int!
+  }
+
   type Query {
-    recommendations(audioFeatures: AudioFeatures, seedGenres: String): [Track]!
+    recommendations(audioOptions: AudioOptions, seedGenres: String): [Track]!
     artist(artistId: String!): Artist!
     artists(artistIds: [String!]!): [Artist!]!
     genres: [String!]!
+    audioFeatures(id: String!): AudioFeatures!
   }
 `;

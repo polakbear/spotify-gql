@@ -10,15 +10,16 @@ export const recommendations: (
 ) => Promise<Track[]> = async (parent: any, args: QueryRecommendationsArgs) => {
   await authenticate();
 
-  const audioFeatures = {
+  const audioOptions = {
     seed_artists: seeds.artists,
     seed_genres: [args.seedGenres] ?? seeds.genres,
     seed_tracks: seeds.tracks,
-    ...args.audioFeatures,
+    ...args.audioOptions,
+    limit: 10,
   };
 
   try {
-    const response = await spotify.getRecommendations(audioFeatures);
+    const response = await spotify.getRecommendations(audioOptions);
     if (response) {
       let artistIds: string[] = [];
       const tracksResult = response.tracks.map((track): Track => {

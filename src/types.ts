@@ -47,6 +47,25 @@ export type ArtistsResult = {
 };
 
 export type AudioFeatures = {
+  __typename?: 'AudioFeatures';
+  acousticness: Scalars['Float'];
+  danceability: Scalars['Float'];
+  duration_ms: Scalars['Int'];
+  energy: Scalars['Float'];
+  id: Scalars['String'];
+  instrumentalness: Scalars['Float'];
+  key: Scalars['Int'];
+  liveness: Scalars['Float'];
+  loudness: Scalars['Float'];
+  mode: Scalars['Int'];
+  speechiness: Scalars['Float'];
+  tempo: Scalars['Float'];
+  track_href: Scalars['String'];
+  uri: Scalars['String'];
+  valence: Scalars['Float'];
+};
+
+export type AudioOptions = {
   analysis_url?: Maybe<Scalars['String']>;
   duration_ms?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['String']>;
@@ -89,6 +108,7 @@ export type Query = {
   __typename?: 'Query';
   artist: Artist;
   artists: Array<Artist>;
+  audioFeatures: AudioFeatures;
   genres: Array<Scalars['String']>;
   recommendations: Array<Maybe<Track>>;
 };
@@ -104,8 +124,13 @@ export type QueryArtistsArgs = {
 };
 
 
+export type QueryAudioFeaturesArgs = {
+  id: Scalars['String'];
+};
+
+
 export type QueryRecommendationsArgs = {
-  audioFeatures?: Maybe<AudioFeatures>;
+  audioOptions?: Maybe<AudioOptions>;
   seedGenres?: Maybe<Scalars['String']>;
 };
 
@@ -239,7 +264,8 @@ export type ResolversTypes = {
   Artist: ResolverTypeWrapper<Artist>;
   ArtistImageMap: ResolverTypeWrapper<ArtistImageMap>;
   ArtistsResult: ResolverTypeWrapper<ArtistsResult>;
-  AudioFeatures: AudioFeatures;
+  AudioFeatures: ResolverTypeWrapper<AudioFeatures>;
+  AudioOptions: AudioOptions;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ExternalURL: ResolverTypeWrapper<ExternalUrl>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
@@ -261,6 +287,7 @@ export type ResolversParentTypes = {
   ArtistImageMap: ArtistImageMap;
   ArtistsResult: ArtistsResult;
   AudioFeatures: AudioFeatures;
+  AudioOptions: AudioOptions;
   Boolean: Scalars['Boolean'];
   ExternalURL: ExternalUrl;
   Float: Scalars['Float'];
@@ -308,6 +335,25 @@ export type ArtistsResultResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type AudioFeaturesResolvers<ContextType = any, ParentType extends ResolversParentTypes['AudioFeatures'] = ResolversParentTypes['AudioFeatures']> = {
+  acousticness?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  danceability?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  duration_ms?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  energy?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  instrumentalness?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  key?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  liveness?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  loudness?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  mode?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  speechiness?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  tempo?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  track_href?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  valence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ExternalUrlResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExternalURL'] = ResolversParentTypes['ExternalURL']> = {
   spotify?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -323,6 +369,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   artist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<QueryArtistArgs, 'artistId'>>;
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType, RequireFields<QueryArtistsArgs, 'artistIds'>>;
+  audioFeatures?: Resolver<ResolversTypes['AudioFeatures'], ParentType, ContextType, RequireFields<QueryAudioFeaturesArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   recommendations?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
 };
@@ -380,6 +427,7 @@ export type Resolvers<ContextType = any> = {
   Artist?: ArtistResolvers<ContextType>;
   ArtistImageMap?: ArtistImageMapResolvers<ContextType>;
   ArtistsResult?: ArtistsResultResolvers<ContextType>;
+  AudioFeatures?: AudioFeaturesResolvers<ContextType>;
   ExternalURL?: ExternalUrlResolvers<ContextType>;
   Image?: ImageResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
