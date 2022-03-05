@@ -1,14 +1,14 @@
-import { QueryArtistsArgs, Resolvers } from '../types';
+import { QueryArtistArgs, Resolvers } from '../types';
 import { authenticate, spotify } from '../helpers/auth';
 
-export const artists: Resolvers['Query']['artists'] = async (
+export const artist: Resolvers['Query']['artist'] = async (
   parent: any,
-  args: QueryArtistsArgs,
+  args: QueryArtistArgs,
 ) => {
   await authenticate();
 
   try {
-    const response = await spotify.getArtists(args.artistIds);
+    const response = await spotify.getArtist(args.artistId);
     if (response) {
       return response;
     }

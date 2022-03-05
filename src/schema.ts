@@ -9,8 +9,8 @@ export const typeDefs = gql`
 
   type Track {
     id: String
-    album: Album!
-    artists: [Artist!]!
+    album: SimplifiedAlbum!
+    artists: [SimplifiedArtist!]!
     available_markets: [String]
     disc_number: Int
     duration_ms: Float
@@ -20,16 +20,39 @@ export const typeDefs = gql`
     name: String!
     popularity: Int
     uri: String!
+    artist_display: String!
   }
 
   type Artist {
-    id: String
-    href: String
+    id: String!
+    href: String!
     name: String!
-    type: String
-    uri: String
-    image: String
+    uri: String!
+    images: [Image]!
     genres: [String]
+  }
+
+  type ExternalURL {
+    spotify: String!
+  }
+
+  type SimplifiedArtist {
+    external_urls: [ExternalURL]
+    id: String!
+    href: String!
+    name: String!
+    uri: String!
+  }
+
+  type SimplifiedAlbum {
+    id: String!
+    artists: [SimplifiedArtist]
+    available_markets: [String]
+    href: String
+    label: String
+    name: String!
+    images: [Image!]!
+    release_date: String!
   }
 
   type Album {
@@ -93,6 +116,7 @@ export const typeDefs = gql`
   type Query {
     recommendations(audioFeatures: AudioFeatures, seedGenres: String): [Track]!
     artist(artistId: String!): Artist!
+    artists(artistIds: [String!]!): [Artist!]!
     genres: [String!]!
   }
 `;

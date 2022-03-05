@@ -2,6 +2,7 @@ import { QueryRecommendationsArgs, Track } from '../types';
 import { authenticate, spotify } from '../helpers/auth';
 import { seeds } from '../config/config';
 import { toMinutes } from '../helpers/time';
+import { createArtistImageMap } from '../helpers/mapping';
 
 export const recommendations: (
   parent: any,
@@ -14,28 +15,38 @@ export const recommendations: (
     seed_genres: [args.seedGenres] ?? seeds.genres,
     seed_tracks: seeds.tracks,
     ...args.audioFeatures,
-
-    // TODO: pre-defined seeds, implement custom later
-    // seed_artists: args.seedArtists,
-    // seed_tracks: args.seedTracks,
   };
 
   try {
     const response = await spotify.getRecommendations(audioFeatures);
     if (response) {
-      return response.tracks.map((track): Track => {
+      let artistIds: string[] = [];
+      const tracksResult = response.tracks.map((track): Track => {
+        artistIds.push(track.artists[0].id);
         return {
           id: track.id,
-          album: track.album,
-          uri: track.uri,
-          name: track.name,
-          artists: track.artists,
           duration_human: toMinutes(track.duration_ms),
-          duration_ms: track.duration_ms,
-          popularity: track.popularity,
-          href: track.href,
+          name: track.name,
+          uri: track.uri,
+          artists: track.artists,
+          album: track.album,
+          artist_display: '',
         };
       });
+
+      try {
+        const artistResponse = await spotify.getArtists(artistIds);
+        const mapping = createArtistImageMap(artistResponse);
+
+        return tracksResult.map((track) => {
+          return {
+            ...track,
+            artist_display: mapping.get(track.artists[0].id),
+          };
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
   } catch (e) {
     console.error(e);
