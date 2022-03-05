@@ -110,7 +110,7 @@ export type Query = {
   artists: Array<Artist>;
   audioFeatures: AudioFeatures;
   genres: Array<Scalars['String']>;
-  recommendations: Array<Maybe<Track>>;
+  recommendations?: Maybe<Array<Maybe<Track>>>;
 };
 
 
@@ -371,7 +371,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType, RequireFields<QueryArtistsArgs, 'artistIds'>>;
   audioFeatures?: Resolver<ResolversTypes['AudioFeatures'], ParentType, ContextType, RequireFields<QueryAudioFeaturesArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  recommendations?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
+  recommendations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
 };
 
 export type RecommendationsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RecommendationsResult'] = ResolversParentTypes['RecommendationsResult']> = {

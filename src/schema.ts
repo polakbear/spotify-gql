@@ -132,7 +132,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    recommendations(audioOptions: AudioOptions, seedGenres: String): [Track]!
+    recommendations(audioOptions: AudioOptions, seedGenres: String): [Track]
     artist(artistId: String!): Artist!
     artists(artistIds: [String!]!): [Artist!]!
     genres: [String!]!
