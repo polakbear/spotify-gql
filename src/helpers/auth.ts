@@ -27,14 +27,6 @@ const fetchToken = async () => {
     }
   } catch (e) {}
 
-  // .then((resp) => resp.text())
-  // .then((resp) => {
-  //   const response = JSON.parse(resp);
-  //   const expires = new Date();
-  //   expires.setHours(expires.getHours() + 1);
-  //   token = response.access_token;
-  // });
-
   return token;
 };
 
